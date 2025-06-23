@@ -1,0 +1,120 @@
+﻿SampleID,Site,DateSampled,Species,Actual_depth,Depth_m,KnownLineage,SuspectedLineage,Hist. Notes,FecundityAnalyses,Sex_Sept2024,NumPolypsEggs,AverageEggs,OocyteStage,AvgEggDiameter_mm,AvgEggDiameter_um,NumEggsMeasured,NumPolypsSperm,AverageSpermaries,SpermaryStage,ColonyDiameter_cm,ColonySize_cm,Lat,Lon
+32,STRI Point,9/10/24,SSID,15,4.572,2,2,no whole polyps in sections,No,M,,,,,,,,,III,30.998,M,9.34826,-82.26261
+33,STRI Point,9/10/24,SSID,10,3.048,2,2,clear eggs and sperm and polyp shapes,Yes,H,5,8.2,III,0.215944444,215.944444,18,4,9,II,14.87,S,9.34829,-82.2625
+34,STRI Point,9/10/24,SSID,9,2.7432,2,2,,Yes,M,,,,,,,5,21.2,II,13.207,S,9.34828,-82.2625
+35,STRI Point,9/10/24,SSID,12,3.6576,2,2,,Yes,M,,,,,,,3,24.66666667,V,22.384,S,9.34843,-82.26261
+36,STRI Point,9/10/24,SSID,13,3.9624,2,2,,Yes,M,,,,,,,5,16,II,21.372,S,9.34848,-82.26264
+37,STRI Point,9/10/24,SSID,11,3.3528,2,2,,Yes,M,,,,,,,4,19.25,III,30.159,M,9.34856,-82.26265
+38,STRI Point,9/10/24,SSID,10,3.048,2,2,no whole polyps in sections,No,M,,,,,,,,,III,28.306,S,9.3486,-82.26264
+39,STRI Point,9/10/24,SSID,8,2.4384,2,2,,Yes,M,,,,,,,4,28.5,II,22.264,S,9.3486,-82.26258
+41,STRI Point,9/10/24,SSID,11,3.3528,,2,,Yes,M,,,,,,,5,33,II,23.356,S,9.34868,-82.2627
+44,STRI Point,9/10/24,SSID,11,3.3528,2,2,,Yes,M,,,,,,,3,31,III,18.205,S,9.34874,-82.26272
+301,STRI Point,9/10/24,SSID,13,3.9624,,2,not enough whole polyps,No,M,,,,,,,,,III,56.179,M,9.34858,-82.26267
+302,STRI Point,9/11/24,SSID,9,2.7432,,2,large eggs,Yes,H,4,12,III,0.2574,257.4,25,4,20.25,II,42.456,M,9.34888,-82.26278
+303,STRI Point,9/11/24,SSID,10,3.048,,2,,Yes,H,4,7.25,III,0.216578947,216.578947,19,4,17.5,II,66.316,L,9.34905,-82.26287
+304,STRI Point,9/11/24,SSID,12,3.6576,,2,,Yes,M,,,,,,,5,22.8,II,36.891,M,9.34914,-82.26297
+305,STRI Point,9/11/24,SSID,12,3.6576,,2,"sample a little degraded, but looks male, not enough whole polyps",No,M,,,,,,,,,II,28.753,S,9.34917,-82.26299
+306,STRI Point,9/11/24,SSID,9,2.7432,,2,not many clear sections with eggs,Yes,H,4,11.5,IV,0.24165,241.65,20,4,18.25,II,97.604,L,9.34923,-82.26295
+307,STRI Point,9/11/24,SSID,8,2.4384,,2,,Yes,M,,,,,,,5,24.6,II,41.469,M,9.34924,-82.26294
+308,STRI Point,9/11/24,SSID,6,1.8288,,2,,Yes,M,,,,,,,5,21.4,II,46.528,M,9.3493,-82.26289
+309,STRI Point,9/11/24,SSID,5,1.524,,2,,Yes,M,,,,,,,4,16.25,III,39.776,M,9.3493,-82.26288
+310,STRI Point,9/11/24,SSID,8,2.4384,,2,,Yes,M,,,,,,,5,27.2,V,26.973,S,9.34917,-82.26282
+311,Punta Caracol,9/11/24,SSID,4,1.2192,,2,no whole polyps in sections,No,M,,,,,,,,,II,75.045,L,9.37849,-82.30323
+312,Punta Caracol,9/11/24,SSID,3,0.9144,,1,,Yes,M,,,,,,,4,20,II,77.66,L,9.37861,-82.30326
+313,Punta Caracol,9/11/24,SSID,3,0.9144,,1,,Yes,M,,,,,,,5,13.4,III,42.604,M,9.37861,-82.30326
+314,Punta Caracol,9/11/24,SSID,3,0.9144,,1,,Yes,M,,,,,,,5,24.4,III,28.62,S,9.37861,-82.30326
+315,Punta Caracol,9/11/24,SSID,3,0.9144,,1,no whole polyps in sections,No,M,,,,,,,,,III,63.638,L,9.37861,-82.30326
+316,Punta Caracol,9/11/24,SSID,3,0.9144,,1,,Yes,M,,,,,,,4,22,III,58.473,M,9.37861,-82.30326
+317,Punta Caracol,9/11/24,SSID,3,0.9144,,1,,No,,,,,,,,,,,117.591,XL,9.37861,-82.3026
+318,Punta Caracol,9/11/24,SSID,3,0.9144,,1,,Yes,M,,,,,,,4,21.25,III,30.974,M,9.37868,-82.30328
+319,Punta Caracol,9/11/24,SSID,3,0.9144,,2,,Yes,M,,,,,,,5,27.8,III,66.114,L,9.37871,-82.30328
+320,Punta Caracol,9/11/24,SSID,3,0.9144,,2,,Yes,M,,,,,,,5,23.6,III,40.064,M,9.37871,-82.30328
+321,Punta Caracol,9/11/24,SSID,3,0.9144,,2,,Yes,M,,,,,,,5,28.6,III,26.663,S,9.37871,-82.30328
+322,Punta Caracol,9/11/24,SSID,4,1.2192,,2,,Yes,M,,,,,,,4,18.75,III,53.186,M,9.37872,-82.30328
+323,Punta Caracol,9/11/24,SSID,3,0.9144,,1,not enough whole polyps,No,M,,,,,,,,,III,106.652,XL,9.37873,-82.3033
+324,Punta Caracol,9/11/24,SSID,3,0.9144,,1,,No,,,,,,,,,,,69.833,L,9.37875,-82.3033
+325,Punta Caracol,9/11/24,SSID,3,0.9144,,1,,No,,,,,,,,,,,74.767,L,9.37875,-82.3033
+326,Punta Caracol,9/11/24,SSID,3,0.9144,,1,,No,,,,,,,,,,,28.515,S,9.37875,-82.3033
+327,Punta Caracol,9/11/24,SSID,3,0.9144,,1,,No,,,,,,,,,,,24.152,S,9.37875,-82.3033
+328,Punta Caracol,9/11/24,SSID,3,0.9144,,2,,Yes,M,,,,,,,4,21.5,III,19.554,S,9.37886,-82.30334
+329,Punta Caracol,9/11/24,SSID,2,0.6096,,1,,No,,,,,,,,,,,72.026,L,,
+330,Punta Caracol,9/11/24,SSID,2,0.6096,,1,,No,,,,,,,,,,,54.142,M,,
+175,Punta Donato,9/9/24,SSID,8,2.4384,,2,"clear spermaries, but only one polyp view",No,M,,,,,,,,,V,121.392,XL,9.35845,-82.36804
+176,Punta Donato,9/9/24,SSID,8,2.4384,2,2,,No,,,,,,,,,,,39.479,M,9.35967,-82.36851
+184,Punta Donato,9/9/24,SSID,9,2.7432,2,2,,Yes,M,,,,,,,5,25,V,65.932,L,9.35971,-82.36842
+185,Punta Donato,9/9/24,SSID,9,2.7432,2,2,"mostly spermaries, but some polyps have many eggs",Yes,H,5,4,III,0.198607143,198.607143,15,5,27.2,II,17.25,S,9.3597,-82.36844
+186,Punta Donato,9/9/24,SSID,8,2.4384,,2,,Yes,H,5,1.4,IV,0.136583333,136.583333,6,5,26.2,III,28.847,S,9.35972,-82.3684
+187,Punta Donato,9/9/24,SSID,8,2.4384,2,2,,Yes,M,,,,,,,3,16,III,49.297,M,9.35972,-82.3684
+188,Punta Donato,9/9/24,SSID,8,2.4384,2,2,,Yes,H,5,0.2,III,0.1725,172.5,2,5,20.4,III,43.433,M,9.35972,-82.3684
+189,Punta Donato,9/9/24,SSID,9,2.7432,,2,,Yes,M,,,,,,,5,25.4,III,29.391,S,9.35976,-82.36837
+190,Punta Donato,9/9/24,SSID,9,2.7432,2,2,,Yes,M,,,,,,,5,20,V,92.222,L,9.35976,-82.36837
+195,Punta Donato,9/9/24,SSID,9,2.7432,,2,,Yes,M,,,,,,,5,25.6,V,90.526,L,9.35981,-82.36834
+196,Punta Donato,9/9/24,SSID,9,2.7432,2,2,,Yes,M,,,,,,,5,19.8,IV,47.543,M,9.35984,-82.3684
+199,Punta Donato,9/9/24,SSID,9,2.7432,2,2,,No,,,,,,,,,,,33.576,M,9.35985,-82.36838
+201,Punta Donato,9/9/24,SSID,9,2.7432,2,2,,Yes,M,,,,,,,5,20,V,44.429,M,9.35984,-82.36837
+203,Punta Donato,9/9/24,SSID,9,2.7432,2,2,,No,,,,,,,,,,,117.7,XL,9.35982,-82.3684
+209,Punta Donato,9/9/24,SSID,10,3.048,2,2,,Yes,H,5,1.4,III,0.21255,212.55,10,5,18.6,III,38.661,M,9.35985,-82.36846
+212,Punta Donato,9/9/24,SSID,9,2.7432,2,2,,No,,,,,,,,,,,68.906,L,9.35984,-82.36837
+213,Punta Donato,9/9/24,SSID,9,2.7432,2,2,slide 213-2 has better egg definition,Yes,H,5,5.4,IV,0.238826087,238.826087,24,5,20.8,III,56.867,M,9.35985,-82.36834
+214,Punta Donato,9/9/24,SSID,8,2.4384,,2,,Yes,F,5,20.2,IV,0.25164,251.64,25,,,,72.105,L,9.35985,-82.36833
+216,Punta Donato,9/9/24,SSID,9,2.7432,,2,no whole polyps,No,M,,,,,,,,,IV,53.058,M,9.35985,-82.36832
+218,Punta Donato,9/9/24,SSID,10,3.048,,2,,Yes,M,,,,,,,5,30.8,V,29.488,S,9.35984,-82.36827
+133,Hospital Point,9/10/24,SSID,8,2.4384,,1,,Yes,M,,,,,,,4,21.25,V,106.931,XL,9.3334,-82.21766
+134,Hospital Point,9/10/24,SSID,8,2.4384,,1,"not the best preparation, multiple orientations",Yes,F,5,2.8,IV,0.29326,293.26,25,,,,87.257,L,9.3334,-82.21765
+137,Hospital Point,9/10/24,SSID,7,2.1336,1,1,,Yes,M,,,,,,,4,21,V,51.941,M,9.3333,-82.21775
+138,Hospital Point,9/10/24,SSID,7,2.1336,1,1,only one polyp view,No,M,,,,,,,,,III,82.725,L,9.33328,-82.21774
+139,Hospital Point,9/10/24,SSID,7,2.1336,1,1,only two polyps views,No,M,,,,,,,,,III,43.998,M,9.33327,-82.21774
+143,Hospital Point,9/10/24,SSID,4,1.2192,,1,,Yes,M,,,,,,,4,20.5,III,166.984,XL,9.33321,-82.21772
+144,Hospital Point,9/10/24,SSID,4,1.2192,1,1,,Yes,M,,,,,,,5,19,V,107.015,XL,9.33322,-82.21772
+145,Hospital Point,9/10/24,SSID,4,1.2192,1,1,,Yes,M,,,,,,,5,27,IV,126.357,XL,9.3332,-82.21769
+147,Hospital Point,9/10/24,SSID,5,1.524,1,1,"has very tiny developing eggs in mesenteries with sperm, not counted due to only one polyp view",No,H,,,I,,,,,,III,87.361,L,9.3332,-82.21766
+149,Hospital Point,9/10/24,SSID,5,1.524,1,1,,Yes,M,,,,,,,4,24.75,V,44.12,M,9.33319,-82.21765
+151,Hospital Point,9/10/24,SSID,6,1.8288,1,1,,Yes,M,,,,,,,3,18.33333333,V,107.856,XL,9.33314,-82.21769
+152,Hospital Point,9/10/24,SSID,6,1.8288,1,1,only one polyp view,No,M,,,,,,,,,III,34.98,M,9.33313,-82.21768
+153,Hospital Point,9/10/24,SSID,6,1.8288,1,1,,No,,,,,,,,,,,35.016,M,9.33315,-82.21765
+154,Hospital Point,9/10/24,SSID,5,1.524,1,1,,Yes,M,,,,,,,5,20.8,III,90.941,L,9.33315,-82.21764
+155,Hospital Point,9/10/24,SSID,6,1.8288,1,1,,Yes,M,,,,,,,4,19.75,III,87.576,L,9.33314,-82.21764
+156,Hospital Point,9/10/24,SSID,6,1.8288,1,1,,Yes,M,,,,,,,4,22.5,III,88.785,L,9.33314,-82.21764
+158,Hospital Point,9/10/24,SSID,6,1.8288,1,1,"few eggs, sample a little degraded - not quality enough for counting spermaries",Yes,H,5,0.666666667,III,0.14315,143.15,10,,,III,79.931,L,9.33321,-82.21777
+159,Hospital Point,9/10/24,SSID,6,1.8288,1,1,,Yes,F,4,5.75,IV,0.24778,247.78,25,,,,75.96,L,9.33326,-82.21781
+142,Hospital Point,9/10/24,SSID,6,1.8288,1,1,,Yes,M,,,,,,,5,18.8,III,109.893,XL,9.33323,-82.21772
+331,Sid Ciudad,9/12/24,SSID,4,1.2192,,1,"not preserved well, but looks like spermaries, countable",Yes,M,,,,,,,4,21.25,II,58.735,M,9.28972,-82.25842
+332,Sid Ciudad,9/12/24,SSID,3,0.9144,,1,"not preserved well, but can see sperm clusters, countable",Yes,M,,,,,,,4,22,III,78.826,L,9.28972,-82.25846
+333,Sid Ciudad,9/12/24,SSID,3,0.9144,,1,"not the best resolution, countable",Yes,M,,,,,,,5,20.8,III,57.843,M,9.28972,-82.25848
+334,Sid Ciudad,9/12/24,SSID,3,0.9144,,1,,Yes,M,,,,,,,5,23.4,III,64.958,L,9.28974,-82.25854
+335,Sid Ciudad,9/12/24,SSID,3,0.9144,,2,,Yes,M,,,,,,,5,23,V,49.81,M,9.28974,-82.25861
+336,Sid Ciudad,9/12/24,SSID,3,0.9144,,2,no polyp views,No,M,,,,,,,,,V,28.905,S,9.28974,-82.25861
+337,Sid Ciudad,9/12/24,SSID,3,0.9144,,1,"not the best resolution, spermaries countable",Yes,M,,,,,,,4,15,III,85.047,L,9.2897,-82.25852
+338,Sid Ciudad,9/12/24,SSID,3,0.9144,,2,,No,,,,,,,,,,,32.424,M,9.28972,-82.25851
+339,Sid Ciudad,9/12/24,SSID,3,0.9144,,1,"not the best resolution, spermaries countable",Yes,M,,,,,,,5,14.4,III,52.636,M,9.28971,-82.25848
+340,Sid Ciudad,9/12/24,SSID,3,0.9144,,1,"clearly spermaries, but no polyp views",No,M,,,,,,,,,III,150.494,XL,9.28968,-82.25848
+341,Sid Ciudad,9/12/24,SSID,3,0.9144,,1,"not the best resolution, no polyp views",No,M,,,,,,,,,III,44.355,M,9.28964,-82.25848
+342,Sid Ciudad,9/12/24,SSID,3,0.9144,,1,,Yes,M,,,,,,,5,24.4,V,125.667,XL,9.28963,-82.25845
+343,Sid Ciudad,9/12/24,SSID,3,0.9144,,1,,Yes,M,,,,,,,5,21.6,V,61.118,L,9.2896,-82.25843
+344,Sid Ciudad,9/12/24,SSID,3,0.9144,,1,,Yes,M,,,,,,,3,17,IV,68.488,L,9.28959,-82.25842
+345,Sid Ciudad,9/12/24,SSID,3,0.9144,,1,"poor preparation, slide 1 better",Yes,M,,,,,,,4,21.5,III,34.866,M,9.28959,-82.2584
+346,Sid Ciudad,9/12/24,SSID,3,0.9144,,1,,Yes,M,,,,,,,4,17.75,V,92.102,L,9.28957,-82.25838
+347,Sid Ciudad,9/12/24,SSID,3,0.9144,,1,"clear spermaries, no polyp views",No,M,,,,,,,,,V,105.49,XL,9.28958,-82.25838
+348,Sid Ciudad,9/12/24,SSID,3,0.9144,,1,,Yes,M,,,,,,,4,23.5,IV,61.659,L,9.28954,-82.25835
+349,Sid Ciudad,9/12/24,SSID,3,0.9144,,1,,Yes,M,,,,,,,3,22,V,42.415,M,9.28953,-82.25829
+350,Sid Ciudad,9/12/24,SSID,3,0.9144,,1,,Yes,M,,,,,,,5,23.6,IV,65.336,L,9.28952,-82.25827
+61,Cristobal Island,9/12/24,SSID,3,0.9144,1,1,,No,,,,,,,,,,,3313.596,XL,9.26827,-82.24228
+62,Cristobal Island,9/12/24,SSID,3,0.9144,1,1,,Yes,F,5,4,IV,0.179428571,179.428571,21,,,,65.573,L,9.2683,-82.24232
+63,Cristobal Island,9/12/24,SSID,3,0.9144,1,1,only 2 polyp views,No,M,,,,,,,,,III,47.215,M,9.26838,-82.24231
+65,Cristobal Island,9/12/24,SSID,3,0.9144,1,1,,Yes,M,,,,,,,4,19,IV,99.871,L,9.2684,-82.24231
+66,Cristobal Island,9/12/24,SSID,3,0.9144,1,1,not well enough processed for counting spermaries,No,M,,,,,,,,,III,106.672,XL,9.26841,-82.24232
+67,Cristobal Island,9/12/24,SSID,3,0.9144,1,1,not enough whole polyps,No,M,,,,,,,,,III,20.97,S,9.26842,-82.2423
+69,Cristobal Island,9/12/24,SSID,3,0.9144,1,1,,No,,,,,,,,,,,27.533,S,9.26844,-82.24231
+71,Cristobal Island,9/12/24,SSID,3,0.9144,1,1,,Yes,M,,,,,,,4,17.75,III,77.23,L,9.26849,-82.24234
+73,Cristobal Island,9/12/24,SSID,3,0.9144,1,1,,Yes,M,,,,,,,3,22.33333333,IV,56.354,M,9.26853,-82.24234
+74,Cristobal Island,9/12/24,SSID,3,0.9144,1,1,"very clear spermaries, no whole polyp views",No,M,,,,,,,,,V,19.949,S,9.26853,-82.24234
+76,Cristobal Island,9/12/24,SSID,3,0.9144,1,1,,No,,,,,,,,,,,25.899,S,9.2686,-82.24236
+77,Cristobal Island,9/12/24,SSID,3,0.9144,1,1,,Yes,M,,,,,,,5,21.2,III,21.001,S,9.26866,-82.2424
+78,Cristobal Island,9/12/24,SSID,3,0.9144,1,1,no whole polyps,No,M,,,,,,,,,II,40.622,M,9.26863,-82.24243
+80,Cristobal Island,9/12/24,SSID,3,0.9144,1,1,,No,,,,,,,,,,,20.094,S,9.26865,-82.24248
+81,Cristobal Island,9/12/24,SSID,3,0.9144,1,1,,No,,,,,,,,,,,58.113,M,9.26863,-82.24248
+82,Cristobal Island,9/12/24,SSID,3,0.9144,1,1,"sperm development present, but bad cellular resolution",No,M,,,,,,,,,II,95.14,L,9.26862,-82.24254
+83,Cristobal Island,9/12/24,SSID,3,0.9144,1,1,,Yes,M,,,,,,,5,19,II,98.062,L,9.26861,-82.24254
+85,Cristobal Island,9/12/24,SSID,3,0.9144,1,1,,Yes,M,,,,,,,5,21.8,V,62.85,L,9.26859,-82.24256
+87,Cristobal Island,9/12/24,SSID,3,0.9144,1,1,,Yes,M,,,,,,,5,20.6,V,49.571,M,9.26857,-82.24251
+88,Cristobal Island,9/12/24,SSID,3,0.9144,1,1,,No,,,,,,,,,,,71.63,L,9.26853,-82.24251
