@@ -1,0 +1,430 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2822
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 #Siderastrea siderea and Orbicella franksii 2bRAD workflow\
+#Samples collected along a depth gradient in Bocas del Toro Reef Complex in Panama in April 2022\
+\
+\
+#------------------------------GET DATA FROM TUFTS\
+# Go into directory that you want to move files to \
+\
+# Run the wget command to pull files from Tufts:\
+\
+wget -r -nH --cut-dirs=1 -nc ftp://sarah.davies:XVddLhQ@130.64.74.72//230614-0099_Sarah_Davies-7647/ #Plate1\
+wget -r -nH --cut-dirs=1 -nc ftp://sarah.davies:XVddLhQ@130.64.74.72//20250528-0226X_Sarah_Davies-8542/ #Plate2\
+\
+#------------------------------CHECK THAT DATA DOWNLOADED CORRECTLY\
+\
+# Run md5sum to check that all of the files transferred properly, separately within each of the folders\
+\
+md5sum *.fastq.gz > Panama_md5sum.md5\
+diff <(cut -d' ' -f1 Panama_md5sum.md5) <(cut -d' ' -f1 md5sum.txt) #compare with sequencing facility file - just looking at first column bc they included file paths\
+\
+# Compare the outputs to the md5sum.txt file from the sequencing facility\
+\
+#------------------------------UNZIP FILES\
+\
+gunzip *.gz\
+\
+\
+#------------------------------DEMULTIPLEXING, TRIMMING AND MAPPING \
+# complete all of these steps for each plate separately, we will merge them all later\
+\
+#Download scripts from https://github.com/z0on/2bRAD_GATK\
+git clone https://github.com/z0on/2bRAD_GATK.git\
+\
+# Make everything executable in the 2bRAD_GATK folder:\
+\
+chmod +x *.pl\
+chmod +x *.py\
+chmod +x *.R\
+\
+#==================\
+# Step 1: Splitting by in-read barcode, deduplicating PCR replicates, trimming adaptors, and quality-filtering the reads\
+\
+# creating a file of commands to run (assuming reads are in fastq files, one file per sample.)\
+../2bRAD_denovo/2bRAD_trim_launch_dedup_old.pl fastq > trims #Plate1\
+../2bRAD_denovo/2bRAD_trim_launch_dedup_old.pl fastq > trims #Plate2\
+\
+# modify this trims file to designate where the perl script is and add '&'s to the end of the line\
+# also add the filter minBCcount=50000 so that samples with low read counts dont get thrown out\
+sed 's|^|../2bRAD_denovo/|; s|$| minBCcount=50000 \\&|' trims > trims_dedup\
+\
+--------Plate1\
+#!/bin/bash -l\
+\
+module load perl\
+\
+../2bRAD_denovo/trim2bRAD_2barcodes_dedup_old.pl input=ILL-BC91_S7_L002_R1_001.fastq site=".\{12\}CGA.\{6\}TGC.\{12\}|.\{12\}GCA.\{6\}TCG.\{12\}" adaptor="AGATC?" sampleID=100 deduplicate=1 bc=[ATGC]\{4\} &\
+../2bRAD_denovo/trim2bRAD_2barcodes_dedup_old.pl input=ILL-BC27_S22_L002_R1_001.fastq site=".\{12\}CGA.\{6\}TGC.\{12\}|.\{12\}GCA.\{6\}TCG.\{12\}" adaptor="AGATC?" sampleID=100 deduplicate=1 bc=[ATGC]\{4\} &\
+../2bRAD_denovo/trim2bRAD_2barcodes_dedup_old.pl input=ILL-BC94_S8_L002_R1_001.fastq site=".\{12\}CGA.\{6\}TGC.\{12\}|.\{12\}GCA.\{6\}TCG.\{12\}" adaptor="AGATC?" sampleID=100 deduplicate=1 bc=[ATGC]\{4\} &\
+../2bRAD_denovo/trim2bRAD_2barcodes_dedup_old.pl input=ILL-BC24_S21_L002_R1_001.fastq site=".\{12\}CGA.\{6\}TGC.\{12\}|.\{12\}GCA.\{6\}TCG.\{12\}" adaptor="AGATC?" sampleID=100 deduplicate=1 bc=[ATGC]\{4\} &\
+../2bRAD_denovo/trim2bRAD_2barcodes_dedup_old.pl input=ILL-BC80_S5_L002_R1_001.fastq site=".\{12\}CGA.\{6\}TGC.\{12\}|.\{12\}GCA.\{6\}TCG.\{12\}" adaptor="AGATC?" sampleID=100 deduplicate=1 bc=[ATGC]\{4\} &\
+../2bRAD_denovo/trim2bRAD_2barcodes_dedup_old.pl input=G05_BC__S9_L002_R1_001.fastq site=".\{12\}CGA.\{6\}TGC.\{12\}|.\{12\}GCA.\{6\}TCG.\{12\}" adaptor="AGATC?" sampleID=100 deduplicate=1 bc=[ATGC]\{4\} &\
+../2bRAD_denovo/trim2bRAD_2barcodes_dedup_old.pl input=Undetermined_S0_L002_R1_001.fastq site=".\{12\}CGA.\{6\}TGC.\{12\}|.\{12\}GCA.\{6\}TCG.\{12\}" adaptor="AGATC?" sampleID=100 deduplicate=1 bc=[ATGC]\{4\} &\
+wait\
+---------\
+---------Plate2\
+#!/bin/bash -l\
+\
+module load perl\
+\
+../2bRAD_denovo/trim2bRAD_2barcodes_dedup_old.pl input=28_S28_L001_R1_001.fastq site=".\{12\}CGA.\{6\}TGC.\{12\}|.\{12\}GCA.\{6\}TCG.\{12\}" adaptor="AGATC?" sampleID=100 deduplicate=1 bc=[ATGC]\{4\} minBCcount=50000 &\
+../2bRAD_denovo/trim2bRAD_2barcodes_dedup_old.pl input=13_S13_L001_R1_001.fastq site=".\{12\}CGA.\{6\}TGC.\{12\}|.\{12\}GCA.\{6\}TCG.\{12\}" adaptor="AGATC?" sampleID=100 deduplicate=1 bc=[ATGC]\{4\} minBCcount=50000 &\
+../2bRAD_denovo/trim2bRAD_2barcodes_dedup_old.pl input=14_S14_L001_R1_001.fastq site=".\{12\}CGA.\{6\}TGC.\{12\}|.\{12\}GCA.\{6\}TCG.\{12\}" adaptor="AGATC?" sampleID=100 deduplicate=1 bc=[ATGC]\{4\} minBCcount=50000 &\
+../2bRAD_denovo/trim2bRAD_2barcodes_dedup_old.pl input=12_S12_L001_R1_001.fastq site=".\{12\}CGA.\{6\}TGC.\{12\}|.\{12\}GCA.\{6\}TCG.\{12\}" adaptor="AGATC?" sampleID=100 deduplicate=1 bc=[ATGC]\{4\} minBCcount=50000 &\
+../2bRAD_denovo/trim2bRAD_2barcodes_dedup_old.pl input=3_S3_L001_R1_001.fastq site=".\{12\}CGA.\{6\}TGC.\{12\}|.\{12\}GCA.\{6\}TCG.\{12\}" adaptor="AGATC?" sampleID=100 deduplicate=1 bc=[ATGC]\{4\} minBCcount=50000 &\
+../2bRAD_denovo/trim2bRAD_2barcodes_dedup_old.pl input=16_S16_L001_R1_001.fastq site=".\{12\}CGA.\{6\}TGC.\{12\}|.\{12\}GCA.\{6\}TCG.\{12\}" adaptor="AGATC?" sampleID=100 deduplicate=1 bc=[ATGC]\{4\} minBCcount=5000 &\
+wait\
+---------\
+qsub -pe omp 4 -l mem_per_core=16 trims_dedup\
+\
+# FOR ROW 16,25,31,18 - I SET MIN BC COUNT TO 5000\
+\
+\
+\
+# sanity check - count number of *.tr0 files created\
+ls -l *.tr0 | wc -l\
+# PLATE1: we have 246 samples, but 12 undetermined so 234 total, all present\
+# PLATE2: we have 343 samples, but 12 undetermined so should have 355 files - I have 342\
+\
+\
+#moving all plates into one directory so that we can trim and map together! #ADEN DON'T DO THIS - just run the "trimse" script in the same directory as your tr0 files\
+cp *.tr0 ../all_Panama/\
+\
+cd all_Panama\
+\
+\
+##### denovo: removing reads with qualities at ends less than Q15\
+#####>trimse\
+#####for file in *.tr0; do\
+#####echo "cutadapt -q 15,15 -m 36 -o $\{file/.tr0/\}.trim $file > $\{file\}_trimlog.txt" >> trimse;\
+#####done\
+\
+# for reference-based analysis: trimming poor quality bases off ends: this is what I did!\
+>trimse\
+for file in *.tr0; do\
+echo "cut adapt -q 15,15 -m 25 -o $\{file/.tr0/\}.trim $file > $\{file\}_trimlog.txt" >> trimse;\
+done\
+\
+#remove all "undetermined" fastq file commands from the trimse file before running\
+\
+# ----\
+\
+#!/bin/bash -l\
+\
+module load cutadapt\
+\
+cutadapt -q 15,15 -m 25 -o 10_S10_L001_R1_001_AGTG.trim 10_S10_L001_R1_001_AGTG.tr0 > 10_S10_L001_R1_001_AGTG.tr0_trimlog.txt\
+cutadapt -q 15,15 -m 25 -o 10_S10_L001_R1_001_CATC.trim 10_S10_L001_R1_001_CATC.tr0 > 10_S10_L001_R1_001_CATC.tr0_trimlog.txt\
+cutadapt -q 15,15 -m 25 -o 10_S10_L001_R1_001_CTAC.trim 10_S10_L001_R1_001_CTAC.tr0 > 10_S10_L001_R1_001_CTAC.tr0_trimlog.txt\
+cutadapt -q 15,15 -m 25 -o 10_S10_L001_R1_001_GACT.trim 10_S10_L001_R1_001_GACT.tr0 > 10_S10_L001_R1_001_GACT.tr0_trimlog.txt\
+cutadapt -q 15,15 -m 25 -o 10_S10_L001_R1_001_GCTT.trim 10_S10_L001_R1_001_GCTT.tr0 > 10_S10_L001_R1_001_GCTT.tr0_trimlog.txt\
+cutadapt -q 15,15 -m 25 -o 10_S10_L001_R1_001_GTGA.trim 10_S10_L001_R1_001_GTGA.tr0 > 10_S10_L001_R1_001_GTGA.tr0_trimlog.txt\
+\
+# ---\
+\
+qsub -pe omp 4 -l mem_per_core=16 trimse\
+\
+\
+#move all output files to new directory\
+mv *.trim ./fastqs\
+cd fastqs\
+ls -l *.trim | wc -l #564 \
+\
+# only keep shelby 133 samples from here\
+\
+\
+#------------------------------REMOVING SYM READS BEFORE STARTING DE NOVO ANALYSIS\
+#------------ Mapping to Symbiodiniaceae genomes, discarding reads that stick\
+\
+SYM_REF=/projectnb/davieslab/allys/Panama2022/sym-genome/symABCD_genome.fasta\
+\
+#make a file called mapsym that contains the bowtie2 mapping job we want to run for every trim file in fastqs folder\
+>mapsym\
+for F in `ls LOW*.trim`; do\
+echo "bowtie2 -x $SYM_REF -U $F -S $F.sam">>mapsym\
+done\
+\
+# --- \
+#!/bin/bash -l\
+\
+module load bowtie2\
+\
+bowtie2 -x /projectnb/davieslab/allys/Panama2022/sym-genome/symABCD_genome.fasta -U 10_S10_L001_R1_001_AGTG.trim -S 10_S10_L001_R1_001_AGTG.trim.sam\
+bowtie2 -x /projectnb/davieslab/allys/Panama2022/sym-genome/symABCD_genome.fasta -U 10_S10_L001_R1_001_CATC.trim -S 10_S10_L001_R1_001_CATC.trim.sam\
+bowtie2 -x /projectnb/davieslab/allys/Panama2022/sym-genome/symABCD_genome.fasta -U 10_S10_L001_R1_001_CTAC.trim -S 10_S10_L001_R1_001_CTAC.trim.sam\
+bowtie2 -x /projectnb/davieslab/allys/Panama2022/sym-genome/symABCD_genome.fasta -U 10_S10_L001_R1_001_GACT.trim -S 10_S10_L001_R1_001_GACT.trim.sam\
+bowtie2 -x /projectnb/davieslab/allys/Panama2022/sym-genome/symABCD_genome.fasta -U 10_S10_L001_R1_001_GCTT.trim -S 10_S10_L001_R1_001_GCTT.trim.sam\
+bowtie2 -x /projectnb/davieslab/allys/Panama2022/sym-genome/symABCD_genome.fasta -U 10_S10_L001_R1_001_GTGA.trim -S 10_S10_L001_R1_001_GTGA.trim.sam\
+\
+# ---\
+\
+qsub -pe omp 8 -l mem_per_core=12 mapsym\
+\
+\
+# save the fastq reads that do NOT map to chr11-14 (Symbiodinium genomes) and convert sam files back to fastq format\
+# the following also converts SAM files back to FASTQ:\
+# Subset all lines where the third element is "*" (i.e., the sequence did not align to the Symbiodiniaceae genome), extract elements 1, 10 and 11, add @ to beginning of each line, change first tab delimiter (\\t) to new line (\\n) delimiter, change second tab delimiter to new line delimiter with "+" on a new line in between\
+\
+>sam2fq\
+for S in `ls *.sam`; do\
+F=`echo $S | perl -pe 's/\\..+//'`;\
+echo "cat $S | awk '\\$3==\\"*\\"' | cut -f1,10,11 | sed 's/^/@/' | sed 's/\\t/\\n/' | sed 's/\\t/\\n+\\n/' > $F.nosymbio.fastq">>sam2fq;\
+done\
+\
+# ---\
+\
+#!/bin/bash -l\
+\
+module load samtools\
+\
+cat 10_S10_L001_R1_001_AGTG.trim.sam | awk '$3=="*"' | cut -f1,10,11 | sed 's/^/@/' | sed 's/\\t/\\n/' | sed 's/\\t/\\n+\\n/' > 10_S10_L001_R1_001_AGTG.nosymbio.fastq\
+cat 10_S10_L001_R1_001_CATC.trim.sam | awk '$3=="*"' | cut -f1,10,11 | sed 's/^/@/' | sed 's/\\t/\\n/' | sed 's/\\t/\\n+\\n/' > 10_S10_L001_R1_001_CATC.nosymbio.fastq\
+cat 10_S10_L001_R1_001_CTAC.trim.sam | awk '$3=="*"' | cut -f1,10,11 | sed 's/^/@/' | sed 's/\\t/\\n/' | sed 's/\\t/\\n+\\n/' > 10_S10_L001_R1_001_CTAC.nosymbio.fastq\
+cat 10_S10_L001_R1_001_GACT.trim.sam | awk '$3=="*"' | cut -f1,10,11 | sed 's/^/@/' | sed 's/\\t/\\n/' | sed 's/\\t/\\n+\\n/' > 10_S10_L001_R1_001_GACT.nosymbio.fastq\
+cat 10_S10_L001_R1_001_GCTT.trim.sam | awk '$3=="*"' | cut -f1,10,11 | sed 's/^/@/' | sed 's/\\t/\\n/' | sed 's/\\t/\\n+\\n/' > 10_S10_L001_R1_001_GCTT.nosymbio.fastq\
+cat 10_S10_L001_R1_001_GTGA.trim.sam | awk '$3=="*"' | cut -f1,10,11 | sed 's/^/@/' | sed 's/\\t/\\n/' | sed 's/\\t/\\n+\\n/' > 10_S10_L001_R1_001_GTGA.nosymbio.fastq\
+\
+# ---\
+\
+qsub sam2fq\
+\
+\
+\
+# now separate all files into SSID vs non-SSID into /projectnb/davieslab/allys/Panama2022/no-sym-seqs\
+\
+# first create a file "SSIDs-fastq" which contains a list of all of the file names of SSIDs you want\
+# run the code below to loop through each filename in the list "SSIDs-fastq" :\
+\
+while read -r file; do\
+    if [ -f "$file" ]; then\
+        mv "$file" /projectnb/davieslab/allys/Panama2022/no-sym-seqs/ssids/\
+    else\
+        echo "File not found: $file"\
+    fi\
+done < SSIDs-fastq\
+\
+\
+\
+#------------------------------- MAPPING TO S. SIDEREA GENOME\
+https://www.ebi.ac.uk/ena/browser/view/GCA_964030785\
+\
+# --- Index the genome\
+\
+cd /projectnb/davieslab/allys/SSIDgenome\
+\
+nano index\
+\
+#---\
+\
+#!/bin/bash -l\
+\
+module load bowtie2\
+\
+export GENOME_FASTA=/projectnb/davieslab/allys/SSIDgenome/GCA_964030785.1.fasta\
+\
+bowtie2-build $GENOME_FASTA $GENOME_FASTA\
+\
+samtools faidx $GENOME_FASTA\
+\
+#---\
+\
+qsub -pe omp 8 -l mem_per_core=12 index\
+\
+\
+\
+#### Map to the genome\
+\
+cd /projectnb/davieslab/allys/Panama2022/no-sym-seqs/ssids\
+\
+#check all files are here\
+ls -l *.fastq | wc -l\
+# 133\
+\
+export GENOME_FASTA=/projectnb/davieslab/allys/SSIDgenome/GCA_964030785.1.fasta\
+\
+# for reference-based: mapping with --local option, enables clipping of mismatching ends (guards against deletions near ends of RAD tags)\
+../../2bRAD_GATK/2bRAD_bowtie2_launch.pl '\\.fastq$' $GENOME_FASTA > maps_SSIDgenome\
+\
+# ---\
+\
+#!/bin/bash -l\
+\
+module load bowtie2\
+\
+bowtie2 --no-unal --score-min L,16,1 --local -L 16 -x /projectnb/davieslab/allys/SSIDgenome/GCA_964030785.1.fasta -U G07_BC__S11_L002_R1_001_GACT.nosymbio.fastq -S G07_BC__S11_L002_R1_001_GACT.nosymbio.fastq.bt2.sam\
+bowtie2 --no-unal --score-min L,16,1 --local -L 16 -x /projectnb/davieslab/allys/SSIDgenome/GCA_964030785.1.fasta -U 20_S20_L001_R1_001_CTAC.nosymbio.fastq -S 20_S20_L001_R1_001_CTAC.nosymbio.fastq.bt2.sam\
+bowtie2 --no-unal --score-min L,16,1 --local -L 16 -x /projectnb/davieslab/allys/SSIDgenome/GCA_964030785.1.fasta -U 29_S29_L001_R1_001_ACCA.nosymbio.fastq -S 29_S29_L001_R1_001_ACCA.nosymbio.fastq.bt2.sam\
+bowtie2 --no-unal --score-min L,16,1 --local -L 16 -x /projectnb/davieslab/allys/SSIDgenome/GCA_964030785.1.fasta -U 21_S21_L001_R1_001_AGAC.nosymbio.fastq -S 21_S21_L001_R1_001_AGAC.nosymbio.fastq.bt2.sam\
+bowtie2 --no-unal --score-min L,16,1 --local -L 16 -x /projectnb/davieslab/allys/SSIDgenome/GCA_964030785.1.fasta -U ILL-BC90_S13_L002_R1_001_TGTC.nosymbio.fastq -S ILL-BC90_S13_L002_R1_001_TGTC.nosymbio.fastq.bt2.sam\
+bowtie2 --no-unal --score-min L,16,1 --local -L 16 -x /projectnb/davieslab/allys/SSIDgenome/GCA_964030785.1.fasta -U G08_BC__S12_L002_R1_001_TGTC.nosymbio.fastq -S G08_BC__S12_L002_R1_001_TGTC.nosymbio.fastq.bt2.sam\
+\
+# ---\
+\
+qsub -pe omp 8 -l mem_per_core=12 maps_SSIDgenome\
+\
+# sanity check on file count\
+ls *nosymbio.fastq.bt2.sam > sams_SSIDgenome\
+cat sams_SSIDgenome | wc -l #133\
+\
+\
+#------------ quality assessment\
+\
+# check alignment rates:\
+\
+>alignmentRates_SSIDgenome\
+for F in `ls *MullenDavies*.fastq`; do \
+M=`grep -E '^[ATGCN]+$' $F | wc -l | grep -f - maps_SSIDgenome.e8941123 -A 4 | tail -1 | perl -pe 's/maps_SSIDgenome\\.e\\d+-|% overall alignment rate//g'` ;\
+echo "$F $M">>alignmentRates_SSIDgenome;\
+done\
+\
+#check this file out and make sure alignment rates look good before continuing\
+\
+\
+#### --- compressing, sorting and indexing the SAM files, so they become BAM files:\
+\
+module load samtools\
+\
+cat sams_SSIDgenome | perl -pe 's/(\\S+)\\.sam/samtools view -bS $1\\.sam >$1\\.unsorted\\.bam && samtools sort $1\\.unsorted\\.bam -o $1\\.bam && samtools index $1\\.bam/' >s2b_SSIDgenome\
+\
+# ---\
+\
+#!/bin/bash -l\
+\
+module load samtools\
+\
+samtools view -bS 20_S20_L001_R1_001_ACCA.nosymbio.fastq.bt2.sam >20_S20_L001_R1_001_ACCA.nosymbio.fastq.bt2.unsorted.bam && samtools sort 20_S20_L001_R1_001_ACCA.nosymbio.fastq.bt2.unsorted.bam -o 20_S20_L001_R1_001_ACCA.nosymbio.fastq.bt2.bam && samtools index 20_S20_L001_R1_001_ACCA.nosymbio.fastq.bt2.bam\
+samtools view -bS 20_S20_L001_R1_001_AGAC.nosymbio.fastq.bt2.sam >20_S20_L001_R1_001_AGAC.nosymbio.fastq.bt2.unsorted.bam && samtools sort 20_S20_L001_R1_001_AGAC.nosymbio.fastq.bt2.unsorted.bam -o 20_S20_lsL001_R1_001_AGAC.nosymbio.fastq.bt2.bam && samtools index 20_S20_L001_R1_001_AGAC.nosymbio.fastq.bt2.bam\
+samtools view -bS 20_S20_L001_R1_001_AGTG.nosymbio.fastq.bt2.sam >20_S20_L001_R1_001_AGTG.nosymbio.fastq.bt2.unsorted.bam && samtools sort 20_S20_L001_R1_001_AGTG.nosymbio.fastq.bt2.unsorted.bam -o 20_S20_L001_R1_001_AGTG.nosymbio.fastq.bt2.bam && samtools index 20_S20_L001_R1_001_AGTG.nosymbio.fastq.bt2.bam\
+samtools view -bS 20_S20_L001_R1_001_CATC.nosymbio.fastq.bt2.sam >20_S20_L001_R1_001_CATC.nosymbio.fastq.bt2.unsorted.bam && samtools sort 20_S20_L001_R1_001_CATC.nosymbio.fastq.bt2.unsorted.bam -o 20_S20_L001_R1_001_CATC.nosymbio.fastq.bt2.bam && samtools index 20_S20_L001_R1_001_CATC.nosymbio.fastq.bt2.bam\
+samtools view -bS 20_S20_L001_R1_001_CTAC.nosymbio.fastq.bt2.sam >20_S20_L001_R1_001_CTAC.nosymbio.fastq.bt2.unsorted.bam && samtools sort 20_S20_L001_R1_001_CTAC.nosymbio.fastq.bt2.unsorted.bam -o 20_S20_L001_R1_001_CTAC.nosymbio.fastq.bt2.bam && samtools index 20_S20_L001_R1_001_CTAC.nosymbio.fastq.bt2.bam\
+samtools view -bS 20_S20_L001_R1_001_GACT.nosymbio.fastq.bt2.sam >20_S20_L001_R1_001_GACT.nosymbio.fastq.bt2.unsorted.bam && samtools sort 20_S20_L001_R1_001_GACT.nosymbio.fastq.bt2.unsorted.bam -o 20_S20_L001_R1_001_GACT.nosymbio.fastq.bt2.bam && samtools index 20_S20_L001_R1_001_GACT.nosymbio.fastq.bt2.bam\
+\
+# ---\
+\
+qsub s2b_SSIDgenome \
+\
+\
+rm -f *unsorted* #save space\
+ls *bam | wc -l  # should be the same number as number of .fastq files\
+#133\
+\
+\
+# BAM files are the input into various genotype calling / popgen programs, this is the main interim result of the analysis. Archive them!\
+mkdir angsd\
+mv *.bam ./angsd/\
+\
+#remove the "bt2" from filenames\
+for f in *.bt2.bam; do\
+  newname="$\{f/.bt2.bam/.bam\}"\
+  mv "$f" "$newname"\
+done\
+\
+\
+#------------------------------ANGSD (fuzzy genotyping)\
+# "FUZZY genotyping" with ANGSD - without calling actual genotypes but working with genotype likelihoods at each SNP. Optimal for low-coverage data (<10x).\
+\
+# listing all bam filenames \
+ls *bam >bams\
+\
+module load angsd\
+\
+#----------- assessing base qualities and coverage depth\
+\
+# angsd settings:\
+# -minMapQ 20 : only highly unique mappings (prob of erroneous mapping =< 1%)\
+# -baq 1 : realign around indels (not terribly relevant for 2bRAD reads mapped with --local option) \
+# -maxDepth : highest total depth (sum over all samples) to assess; set to 10x number of samples (133)\
+# -minInd : the minimal number of individuals the site must be genotyped in. Reset to 50% of total N at this stage. (133)\
+\
+FILTERS="-uniqueOnly 1 -remove_bads 1 -minMapQ 20 -maxDepth 1330 -minInd 66\'94\
+\
+# T O   D O : \
+TODO="-doQsDist 1 -doDepth 1 -doCounts 1 -dumpCounts 2"\
+\
+# in the following line, -r argument is one chromosome or contig to work with (no need to do this for whole genome as long as the chosen chromosome or contig is long enough, ~1 Mb. When mapping to a real genome, consider chr1:1-1000000 )\
+# (look up lengths of your contigs in the header of *.sam files)\
+# i'm not using here and just running on entire reference\
+\
+angsd -b bams -GL 1 $FILTERS $TODO -P 1 -out dd\
+\
+\
+# summarizing results (using modified script by Matteo Fumagalli)\
+module load R\
+Rscript ../../../2bRAD_GATK/plotQC.R dd\
+\
+# open dd.pdf to look at distribution of base quality scores, fraction of sites in each sample passing coverage thresholds, and fraction of sites passing genotyping rates cutoffs. Use these to guide choices of -minQ,  -minIndDepth and -minInd filters in subsequent ANGSD runs\
+\
+\
+#----------- clones detection (**minInd ~80% of samples usually, but changing it to 60% based on genotyping rate cutoff)\
+\
+#submitting these all together as one job\
+\
+nano clone-detection\
+\
+----\
+#!/bin/bash -l\
+\
+module load angsd\
+\
+\
+# the -doBcf flag produces a vcf file at this stage.\
+# set minInd to 60% of number of samples = 133\
+FILTERS="-uniqueOnly 1 -remove_bads 1 -minMapQ 20 -minQ 25 -dosnpstat 1 -doHWE 1 -sb_pval 1e-5 -hetbias_pval 1e-5 -skipTriallelic 1 -minInd 79 -snp_pval 1e-5 -minMaf 0.05"\
+TODO="-doMajorMinor 1 -doMaf 1 -doCounts 1 -makeMatrix 1 -doIBS 1 -doCov 1 -doGeno 8 -doBcf 1 -doPost 1 -doGlf 2"\
+\
+angsd -b bams -GL 1 $FILTERS $TODO -P 1 -out myresult\
+\
+\
+# Add the -setMinDepthInd filter to see what happens\
+# Starting with -setMinDepthInd 2 and see what happens when we increase it\
+FILTERS="-uniqueOnly 1 -remove_bads 1 -minMapQ 20 -minQ 25 -dosnpstat 1 -doHWE 1 -sb_pval 1e-5 -hetbias_pval 1e-5 -skipTriallelic 1 -minInd 79 -snp_pval 1e-5 -minMaf 0.05 -setMinDepthInd 2"\
+TODO="-doMajorMinor 1 -doMaf 1 -doCounts 1 -makeMatrix 1 -doIBS 1 -doCov 1 -doGeno 8 -doBcf 1 -doPost 1 -doGlf 2"\
+\
+angsd -b bams -GL 1 $FILTERS $TODO -P 1 -out myresult2\
+\
+NSITES=`zcat myresult2.mafs.gz | wc -l`\
+echo $NSITES\
+#15330\
+\
+----\
+\
+qsub clone-detection\
+\
+\
+# scp *.ibsMat and bams to laptop, use angsd_ibs_pca.R to analyze dendrogram clustering\
+# just producing cluster dendrograms now to ID clones and tech reps, PCA next step\
+\
+# continuing with filters from myresult\
+\
+\
+#------------------------------RE-RUN WITHOUT TECH REPS & CLONES\
+\
+# first with all duplicate preps removed, but with the clones detected still included\
+# note the -minInd changes, to ~80% of our now 221 samples = 107\
+0\
+FILTERS="-uniqueOnly 1 -remove_bads 1 -minMapQ 20 -minQ 25 -dosnpstat 1 -doHWE 1 -sb_pval 1e-5 -hetbias_pval 1e-5 -skipTriallelic 1 -minInd 53 -snp_pval 1e-5 -minMaf 0.05 -setMinDepthInd 2"\
+TODO="-doMajorMinor 1 -doMaf 1 -doCounts 1 -makeMatrix 1 -doIBS 1 -doCov 1 -doGeno 8 -doBcf 1 -doPost 1 -doGlf 2"\
+\
+angsd -b bams_notechreps -GL 1 $FILTERS $TODO -P 1 -out ./no-tech-reps/myresult.notechreps\
+\
+NSITES=`zcat ./no-tech-reps/myresult.notechreps.mafs.gz | wc -l`\
+echo $NSITES\
+# 7156\
+\
+# now with all clones and low quality samples removed, left with 100 samples\
+#removed samples causing issues\
+FILTERS="-uniqueOnly 1 -remove_bads 1 -minMapQ 20 -minQ 25 -dosnpstat 1 -doHWE 1 -sb_pval 1e-5 -hetbias_pval 1e-5 -skipTriallelic 1 -minInd 60 -snp_pval 1e-5 -minMaf 0.05 -setMinDepthInd 2"\
+TODO="-doMajorMinor 1 -doMaf 1 -doCounts 1 -makeMatrix 1 -doIBS 1 -doCov 1 -doGeno 8 -doBcf 1 -doPost 1 -doGlf 2"\
+# minMaf filter removes neutral loci\
+\
+angsd -b bams_noclones -GL 1 $FILTERS $TODO -P 1 -out ./no-clones/myresult.noclones\
+\
+NSITES=`zcat ./no-clones/myresult.noclones.mafs.gz | wc -l`\
+echo $NSITES\
+# 6697}
